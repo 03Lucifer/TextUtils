@@ -1,23 +1,37 @@
 import React, { useState } from 'react'
 
-export default function About(props) {
+export default function About() {
 
-    // const [myStyle, setMyStyle] = useState({
-    //     color: "black",
-    //     backgroundColor: "white"
-    // })
+    const [myStyle, setMyStyle] = useState({
+        color: "black",
+        backgroundColor: "white"
+    })
 
-    const myStyle = {
-        color: props.mode === 'dark'?'white':'#2d1853',
-        backgroundColor: props.mode === 'dark'?'#592b6b':'white',
+    const [btnText, setBtnText] = useState("Enable Dark Mode")
+
+    const toggleStyle = () =>{
+        if(myStyle.color === "black"){
+            setMyStyle({
+                color: "white",
+                backgroundColor: "black"
+            })
+            setBtnText("Enable Light Mode")
+        }
+        else{
+            setMyStyle({
+                color: "black",
+                backgroundColor: "white"
+            })
+            setBtnText("Enable Dark Mode")
+        }
     }
 
     return (
-        <div className='container' style={{color: props.mode === 'dark'?'white':'#2d1853'}}>
-            <h2 className='my-3' style={{color: props.mode === 'dark'?'white':'#2d1853'}}>About Us</h2>
-            <div className="accordion" id="accordionExample">
+        <div className='container' style={myStyle}>
+            <h2 className='my-3'>About Us</h2>
+            <div className="accordion" id="accordionExample" style={myStyle}>
                 <div className="accordion-item">
-                    <h2 className="accordion-header" id="headingOne">
+                    <h2 className="accordion-header">
                         <button style={myStyle} className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             Accordion Item #1
                         </button>
@@ -52,6 +66,9 @@ export default function About(props) {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div>
+                <button onClick={toggleStyle} type="button" class="btn btn-primary">{btnText}</button>
             </div>
         </div>
     )
