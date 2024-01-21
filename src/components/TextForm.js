@@ -47,22 +47,22 @@ export default function TextForm(props) {
     return (
         <>
             <div className='container' style={{color: props.mode === 'dark'?'white':'black'}}>
-                <h1>{props.heading}</h1>
+                <h1 className='mb-3'>{props.heading}</h1>
                 <div className="mb-3">
-                    <textarea value={text} onChange={handleOnChange} className="form-control" style={{backgroundColor: props.mode === 'dark'?'grey':'white', color: props.mode === 'dark'?'white':'black'}} id="myBox" rows="8"></textarea>
+                    <textarea value={text} onChange={handleOnChange} className="form-control" style={{backgroundColor: props.mode === 'dark'?'#58266f':'white', color: props.mode === 'dark'?'white':'black'}} id="myBox" rows="8"></textarea>
                 </div>
-                <button onClick={handleUpClick} className="btn btn-primary">Convert to Uppercase</button>
-                <button onClick={handleLoClick} className="btn btn-primary mx-3">Convert to Lowercase</button>
+                <button onClick={handleUpClick} disabled={text.length==0} className="btn btn-primary mx-2 my-2">Convert to Uppercase</button>
+                <button onClick={handleLoClick} disabled={text.length==0} className="btn btn-primary mx-2 my-2">Convert to Lowercase</button>
                 {/* <div class="form-check form-switch">
                     <input onClick={handle} class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
                         <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
                 </div> */}
-                <button onClick={handleCaClick} className="btn btn-primary mx-3">Convert to Camelcase</button>
+                <button onClick={handleCaClick} disabled={text.length==0} className="btn btn-primary mx-2 my-2">Convert to Camelcase</button>
             </div>
             <div className='container my-5' style={{color: props.mode === 'dark'?'white':'black'}}>
                 <h1>Your Text Summary:</h1>
-                <p>{text.split(" ").length} words and {text.length} characters</p>
-                <p>{0.008 * text.split("").length} minutes read</p>
+                <p>{text.split(" ").filter((element)=> {return element.length!==0}).length} words and {text.length} characters</p>
+                <p>{0.008 * text.split("").filter((element)=> {return element.length!==0}).length} minutes read</p>
                 <p>{0.008 * text.split("").length} vowels</p>
                 <h2>Preview</h2>
                 <p>{text.length>0 ? text : "Enter something to preview here"}</p>
